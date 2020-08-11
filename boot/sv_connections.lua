@@ -1,31 +1,16 @@
 -----------------------------------------------------------
 ---                       EVENTS                        ---
 -----------------------------------------------------------
-RegisterNetEvent("SendSteamID")
-AddEventHandler("SendSteamID", function(steamIdentifier)
-    local identifiers = GetPlayerIdentifiers(source)
-
-    for _, v in pairs(identifiers) do
-        if string.find(v, "steam") then
-            steamIdentifier = v
-            print("            " .. steamIdentifier)
-            break
-        end
-    end
+RegisterNetEvent("AddSteamIDToDB")
+AddEventHandler("AddSteamIDToDB", function()
+    local steamIdentifier = GetSteamID(source)
 
     if not steamIdentifier then
         CancelEvent()
         DropPlayer(source, "SteamID not found. Log into Steam prior to opening FiveM. Otherwise contact an admin on our Discord: https://Discord.gg/VkfD2")
-    else 
-        TriggerClientEvent("GetSteamID", source, steamIdentifier)
-    end
-end)
-
-RegisterNetEvent("AddConnection")
-AddEventHandler("AddConnection", function(steamIdentifier)
-    MySQL.ready(function()
+    else
         addToConnectionDB(steamIdentifier)
-    end)
+    end
 end)
 
 -----------------------------------------------------------
@@ -44,3 +29,12 @@ function addToConnectionDB(steamIdentifier)
     end)
 end
 
+function GetSteamID(source)
+    local identifiers = GetPlayerIdentifiers(source)
+
+    for _, v in pairs(identifiers) do
+        if string.find(v, "steam") then
+            return v
+        end
+    end
+end
