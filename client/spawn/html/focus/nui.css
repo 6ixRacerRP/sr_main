@@ -1,0 +1,142 @@
+body, #main_menu, #new_character_ui, #load_character_ui {
+    position: fixed; /* Required for height: 100% */
+    margin: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    position: absolute; /* relative to body */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#main_menu .container {
+    left: 20%;
+}
+
+#load_character_ui .container {
+    width: 80%;
+}
+
+button {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+
+    margin: 10px;
+    padding: 15px 20px;
+    outline: none;
+    border: 0;
+    width: 100%;
+    display: block;
+}
+
+.character button {
+    width: 75%;
+    padding: 10px 0px;
+    margin: 5px 0px;
+    border: 1px;
+    border-style: solid;
+    display: inline;
+}
+
+.no_character button {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    font-size: 300%;
+    color: white;
+    border: none;
+}
+
+.play_button {
+    color: green;
+    border-color: green;
+}
+
+.delete_button {
+    color: red;
+    border-color: red;
+}
+
+button:hover {
+    background: rgba(70, 70, 70, 0.5);
+}
+
+button:active {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#new_character_form {
+    background: rgba(0, 0, 0, 0.8);
+    font-family: sans-serif; 
+    text-align: center;
+    padding: 5px 30px;
+    width: 100%;
+}
+
+#new_character_form label {
+    float: left;
+}
+
+#new_character_form input[type="text"] {
+    width: 98%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 0px;
+    text-align: center;
+    border: 0;
+}
+
+#new_character_form input[type="radio"] {
+    float: right;
+    margin-right: 5px;
+}
+
+#new_character_form input[value="SUBMIT"] {
+    background: rgba(0, 0, 0, 0.8);
+    font-weight: bold;
+    padding: 7px;
+    margin-bottom: 10px;
+    border: 0;
+    color: white;
+}
+
+#new_character_form label[for="female"], #form input[id="female"] {
+    margin-top: 5px;
+}
+
+.character hr {
+    width: 80%;
+}
+
+img {
+    width: 60%;
+}
+
+#box1, #box2, #box3, #box4 {
+    width: 20%;
+    height: 100%;
+    margin: 0px 2.5%; /* Quick mafs */
+
+    float: left; /* Forces to align next to eachother */
+
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-family: sans-serif; 
+    text-align: center;
+}
+
+.character_info {
+    text-align: left;
+    padding-left: 10%; 
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="nui.css" type="text/css">
+
+        <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+        <script src="script.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="main_menu" class="hidden">
+            <div class="container">
+                <button id="new_character"><b>NEW CHARACTER</b></button>
+                <button id="load_character"><b>LOAD CHARACTER</b></button>
+                <button id="rules"><b>RULES</b></button>
+                <button id="discord"><b>DISCORD</b></button>
+            </div>
+        </div>
+        <div id="new_character_ui" class="hidden">
+            <div class="container">
+                <div id="new_character_form">
+                    <h2>NEW<br>CHARACTER</h2>
+                    <form>
+                        <label for="first_name" class="form_title"><b>FIRST NAME</b></label><br>
+                        <hr>
+                        <input type="text" id="first_name" name="first_name"><br>
+                        <hr>
+                        <br>
+                        <label for="last_name" class="form_title"><b>LAST NAME</b></label><br>
+                        <hr>
+                        <input type="text" id="last_name" name="last_name"><br>
+                        <hr>
+                        <br>
+                        <label for="appearance" class="form_title"><b>APPEARANCE</b></label><br>
+                        <hr>
+                        <label for="male"><b>MALE</b></label>
+                        <input type="radio" id="male" name="appearance" value="male"><br>
+                        <label for="female"><b>FEMALE</b></label>
+                        <input type="radio" id="female" name="appearance" value="female"><br>
+                        <hr>
+                        <br>
+                        <input id="submit" type="button" value="SUBMIT">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="load_character_ui" class="hidden">
+            <div class="container">
+                <!--BOX1-->
+                <div id="box1">
+
+                    <!--Character-->
+                    <div class="character hidden">
+                        <h3>Character Name</h3>
+                        <hr>
+                        <img src="../img/pp.png">
+                        <hr>
+                        <div class="character_info">
+                            <p class="number"><b>#:</b></p>
+                            <p class="cash"><b>Cash:</b></p>
+                            <p class="bank"><b>Bank:</b></p>
+                        </div>
+                        <hr>
+                        <button class="play_button"><b>PLAY</b></button>
+                        <br>
+                        <button class="delete_button"><b>DELETE</b></button>
+                        <br><p></p>
+                    </div>
+
+                    <!--No Character-->
+                    <div class="no_character">
+                        <button>+</button>
+                    </div>
+
+                </div>
+
+                <!--BOX2-->
+                <div id="box2">
+
+                    <!--Character-->
+                    <div class="character hidden">
+                        <h3>Character Name</h3>
+                        <hr>
+                        <img src="../img/pp.png">
+                        <hr>
+                        <div class="character_info">
+                            <p class="number"><b>#:</b></p>
+                            <p class="cash"><b>Cash:</b></p>
+                            <p class="bank"><b>Bank:</b></p>
+                        </div>
+                        <hr>
+                        <button class="play_button"><b>PLAY</b></button>
+                        <br>
+                        <button class="delete_button"><b>DELETE</b></button>
+                        <br><p></p>
+                    </div>
+
+                    <!--No Character-->
+                    <div class="no_character">
+                        <button>+</button>
+                    </div>
+
+                </div>
+
+                <!--BOX3-->
+                <div id="box3">
+
+                    <!--Character-->
+                    <div class="character hidden">
+                        <h3>Character Name</h3>
+                        <hr>
+                        <img src="../img/pp.png">
+                        <hr>
+                        <div class="character_info">
+                            <p class="number"><b>#:</b></p>
+                            <p class="cash"><b>Cash:</b></p>
+                            <p class="bank"><b>Bank:</b></p>
+                        </div>
+                        <hr>
+                        <button class="play_button"><b>PLAY</b></button>
+                        <br>
+                        <button class="delete_button"><b>DELETE</b></button>
+                        <br><p></p>
+                    </div>
+
+                    <!--No Character-->
+                    <div class="no_character">
+                        <button>+</button>
+                    </div>
+
+                </div>
+
+                <!--BOX4-->
+                <div id="box4">
+
+                    <!--Character-->
+                    <div class="character hidden">
+                        <h3>Character Name</h3>
+                        <hr>
+                        <img src="../img/pp.png">
+                        <hr>
+                        <div class="character_info">
+                            <p class="number"><b>#:</b></p>
+                            <p class="cash"><b>Cash:</b></p>
+                            <p class="bank"><b>Bank:</b></p>
+                        </div>
+                        <hr>
+                        <button class="play_button"><b>PLAY</b></button>
+                        <br>
+                        <button class="delete_button"><b>DELETE</b></button>
+                        <br><p></p>
+                    </div>
+
+                    <!--No Character-->
+                    <div class="no_character">
+                        <button>+</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
