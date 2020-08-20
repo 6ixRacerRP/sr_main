@@ -12,6 +12,11 @@ body, #main_menu, #new_character_ui, #load_character_ui {
     display: none;
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.2;
+}
+
 .container {
     position: absolute; /* relative to body */
     top: 50%;

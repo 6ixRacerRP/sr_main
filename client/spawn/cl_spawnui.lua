@@ -26,17 +26,9 @@ local hospital_spawn = exports.spawnmanager:addSpawnPoint({
 -----------------------------------------------------------
 ---                   NUI CALLBACKS                     ---
 -----------------------------------------------------------
+-- GENERAL
 RegisterNUICallback('NUIFocusOff', function(data)
-    show_nui(false)
-end)
-
-RegisterNUICallback('new_character', function(data)
-    exports.spawnmanager:spawnPlayer(1, function() 
-        SetNuiFocus(false, false)
-        toggle_cam(false)
-    end)
-    
-    TriggerServerEvent("sr:newcharacter", data.first_name, data.last_name, data.appearance) -- Data is passed in through callback
+    SetNuiFocus(false, false)
 end)
 
 RegisterNUICallback('invalid_input', function(data, cb)
@@ -48,13 +40,55 @@ RegisterNUICallback('invalid_input', function(data, cb)
     SetNuiFocus(true, true)
 end)
 
+-- MAIN MENU
+RegisterNUICallback('new_character', function(data)
+    exports.spawnmanager:spawnPlayer(1, function() 
+        SetNuiFocus(false, false)
+        toggle_cam(false)
+    end)
+    
+    TriggerServerEvent("sr:newcharacter", data.first_name, data.last_name, data.appearance) -- Data is passed in through callback
+end)
+
+RegisterNUICallback("load_character", function(data)
+    TriggerServerEvent("sr:sv_loadcharacters", GetPlayerServerId(PlayerId()))
+end)
+
+-----------------------------------------------------------
+---                     NET EVENTS                      ---
+-----------------------------------------------------------
+RegisterNetEvent("sr:cl_loadcharacters")
+AddEventHandler("sr:cl_loadcharacters", function(DBids)
+    for _, entries in ipairs(DBids) do
+        for index, value in pairs(entries) do
+            print(index .. '\t' .. value)
+        end
+        print("----------------------")
+    end
+end)
+
+RegisterNetEvent("sr:cl_numcharacters")
+AddEventHandler("sr:cl_numcharacters", function(numCharacters)
+    SendNUIMessage({
+        new_character = canPlayerCreateCharacter(numCharacters)
+    })
+end)
+
 -----------------------------------------------------------
 ---                        MAIN                         ---
 -----------------------------------------------------------
 exports.spawnmanager:spawnPlayer(1, function(spawn) -- function when player spawns
     Citizen.CreateThread(function()
+        -- Set the camera to the city view
         toggle_cam(true)
-        show_nui(true)
+        -- Ask the server how many characters does this player have.
+        TriggerServerEvent("sr:sv_numcharacters")
+        -- Show the spawn main menu
+        SetNuiFocus(true, true)
+        SendNUIMessage({
+            ui = "main_menu",
+            status = true
+        })
     end)
 end)
 
@@ -68,14 +102,6 @@ exports.spawnmanager:setAutoSpawn(true) -- Allow player to spawn when they are d
 -----------------------------------------------------------
 ---                     FUNCTIONS                       ---
 -----------------------------------------------------------
-function show_nui(bool) 
-    SetNuiFocus(bool, bool)
-    SendNUIMessage({
-        ui = "main_menu",
-        status = bool,
-    })
-end
-
 function toggle_cam(bool)
     if bool then
         cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA", campos.x, campos.y, campos.z, 0, 0, 213.121, GetGameplayCamFov())
@@ -84,5 +110,13 @@ function toggle_cam(bool)
         SetCamAffectsAiming(cam, false)
     else
         RenderScriptCams(false, false, 0, true, false)
+    end
+end
+
+function canPlayerCreateCharacter(numCharacters) 
+    if numCharacters >= 4 then
+        return false
+    else 
+        return true
     end
 end
