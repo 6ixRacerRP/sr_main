@@ -51,7 +51,25 @@ RegisterNUICallback('new_character', function(data)
 end)
 
 RegisterNUICallback("load_character", function(data)
-    TriggerServerEvent("sr:sv_loadcharacters", GetPlayerServerId(PlayerId()))
+    TriggerServerEvent("sr:sv_loadcharacters")
+end)
+
+-- LOAD CHARACTER UI
+RegisterNUICallback("spawn_character", function(data)
+    Citizen.CreateThread(function()
+        -- Spawns character with all data
+        exports.spawnmanager:spawnPlayer(airport_spawn)
+        -- Wait to return cam and control to player
+        Citizen.Wait(1000)
+        -- return cam to Player
+        toggle_cam(false)
+        -- return control to Player
+        SetNuiFocus(false, false)
+    end)
+end)
+
+RegisterNUICallback("delete_character", function(data)
+    TriggerServerEvent("sr:sv_deletecharacter", data.id)
 end)
 
 -----------------------------------------------------------
@@ -59,18 +77,15 @@ end)
 -----------------------------------------------------------
 RegisterNetEvent("sr:cl_loadcharacters")
 AddEventHandler("sr:cl_loadcharacters", function(DBids)
-    for _, entries in ipairs(DBids) do
-        for index, value in pairs(entries) do
-            print(index .. '\t' .. value)
-        end
-        print("----------------------")
-    end
+    SendNUIMessage({
+        characters = DBids
+    })
 end)
 
 RegisterNetEvent("sr:cl_numcharacters")
 AddEventHandler("sr:cl_numcharacters", function(numCharacters)
     SendNUIMessage({
-        new_character = canPlayerCreateCharacter(numCharacters)
+        num_characters = numCharacters
     })
 end)
 
@@ -110,13 +125,5 @@ function toggle_cam(bool)
         SetCamAffectsAiming(cam, false)
     else
         RenderScriptCams(false, false, 0, true, false)
-    end
-end
-
-function canPlayerCreateCharacter(numCharacters) 
-    if numCharacters >= 4 then
-        return false
-    else 
-        return true
     end
 end

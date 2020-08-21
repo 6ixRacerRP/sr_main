@@ -64,6 +64,15 @@ AddEventHandler("sr:sv_numcharacters", function()
     end)
 end)
 
+RegisterNetEvent("sr:sv_deletecharacter")
+AddEventHandler("sr:sv_deletecharacter", function(id)
+    MySQL.ready(function()
+        MySQL.Async.execute("DELETE FROM characters WHERE id=@id", {
+            ['@id'] = id
+        })
+    end)
+end)
+
 -----------------------------------------------------------
 ---                     FUNCTIONS                       ---
 -----------------------------------------------------------

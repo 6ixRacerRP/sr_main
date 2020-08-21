@@ -128,7 +128,7 @@ img {
     width: 60%;
 }
 
-#box1, #box2, #box3, #box4 {
+#box0, #box1, #box2, #box3{
     width: 20%;
     height: 100%;
     margin: 0px 2.5%; /* Quick mafs */
